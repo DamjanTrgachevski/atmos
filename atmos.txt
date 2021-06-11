@@ -1,0 +1,22 @@
+0. INSTALL GIT AND DOCKER ON LOCAL MACHINE
+1. CLONE THE TUTORIALS REPO ON LOCAL MACHINE
+git clone git@github.com:cloudposse/tutorials.git
+cd tutorials/02-atmos
+2. BUILD THE IMAGE FOR OUR TUTORIAL
+make init
+make build
+3. RUN THE ATMOS IMAGE AS A NEW GEODESIC SHELL
+docker run -it \
+       --rm \
+       --volume $HOME:/localhost \
+       --volume $PWD/stacks:/stacks \
+       --volume $PWD/components:/components \
+       cloudposse/atmos:latest
+3. TEST IF SET UP SUCCESSFULLY
+  terraform -v
+  atmos version
+4. TERRAFORM PLAN AND APPLY A COMPONENT 
+  atmos terraform plan fetch-location --stack=example
+  atmos terraform deploy fetch-location --stack=example
+5. INVOKE AN ATMOS WORKFLOW
+  atmos workflow deploy-all -s example
